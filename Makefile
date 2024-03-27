@@ -1,4 +1,4 @@
-TARGET := avremu
+TARGET := avrds
 
 CFLAGS := -Og -g
 
