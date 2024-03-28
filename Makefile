@@ -5,6 +5,7 @@ CFLAGS := -Og -g
 OBJECTS := atmega328p.o\
 		   cpu.o \
 		   instruction_set.o \
+		   log.o \
 		   main.o
 
 .PHONY: clean
