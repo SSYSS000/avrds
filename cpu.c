@@ -200,11 +200,10 @@ void cpu_cycle(struct cpu *cpu)
         SREG.Z = R == 0;
         Rd = R;
         break;
-
     case OP_BCLR:
+        /* CLC, CLH, CLI, CLN, CLS, CLT, CLV and CLZ are handled here. */
         BITCLR(*(unsigned char *)&SREG, s);
         break;
-
     case OP_BLD:
         if (SREG.T) {
             BITSET(Rd, b);
@@ -213,7 +212,6 @@ void cpu_cycle(struct cpu *cpu)
             BITCLR(Rd, b);
         }
         break;
-
     case OP_BRBC:
         if (BITVAL(*(unsigned char *)&SREG, s) == 0) {
             cpu->pc += k;
@@ -309,11 +307,14 @@ void cpu_cycle(struct cpu *cpu)
             cpu->pc += k;
         }
         break;
-
     case OP_BSET:
+        /* SEC, SEH, SEI, SEN, SES, SET, SEV and SEZ are handled here. */
         BITSET(*(unsigned char *)&SREG, s);
+        if (s == 7) {
+            /* NOTE: This is the interrupt flag. The following instruction is
+             to be executed before any pending interrupt. */
+        }
         break;
-
     case OP_BST:
         SREG.T = BITVAL(Rd, b);
         break;
@@ -324,35 +325,9 @@ void cpu_cycle(struct cpu *cpu)
     case OP_JMP:
         cpu->pc = k;
         break;
-
     case OP_CBI:
         /* Clear bit b at I/O address specified by A. */
         cpu_io_out(cpu, A, cpu_io_in(cpu, A) & ~BIT2MASK(b));
-        break;
-
-    case OP_CLC:
-        SREG.C = 0;
-        break;
-    case OP_CLH:
-        SREG.H = 0;
-        break;
-    case OP_CLI:
-        SREG.I = 0;
-        break;
-    case OP_CLN:
-        SREG.N = 0;
-        break;
-    case OP_CLS:
-        SREG.S = 0;
-        break;
-    case OP_CLT:
-        SREG.T = 0;
-        break;
-    case OP_CLV:
-        SREG.V = 0;
-        break;
-    case OP_CLZ:
-        SREG.Z = 0;
         break;
     case OP_COM:
         R = 0xff - Rd;
@@ -542,31 +517,6 @@ case_OP_CP:
         SREG.S = SREG.N ^ SREG.V;
         SREG.Z = R == 0;
         Rd = R;
-        break;
-
-    case OP_SEC:
-        SREG.C = 1;
-        break;
-    case OP_SEH:
-        SREG.H = 1;
-        break;
-    case OP_SEI:
-        SREG.I = 1;
-        break;
-    case OP_SEN:
-        SREG.N = 1;
-        break;
-    case OP_SES:
-        SREG.S = 1;
-        break;
-    case OP_SET:
-        SREG.T = 1;
-        break;
-    case OP_SEV:
-        SREG.V = 1;
-        break;
-    case OP_SEZ:
-        SREG.Z = 1;
         break;
     case OP_SER:
         Rd = 0xff;

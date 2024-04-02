@@ -63,55 +63,7 @@ static uint32_t get_params_call_like(const uint16_t *opcode)
 
 int decode_instruction(const uint16_t *opcode, struct instruction *inst)
 {
-    if (opcode[0] == 0x9488) {
-        inst->op = OP_CLC;
-    }
-    else if (opcode[0] == 0x94d8) {
-        inst->op = OP_CLH;
-    }
-    else if (opcode[0] == 0x94f8) {
-        inst->op = OP_CLI;
-    }
-    else if (opcode[0] == 0x94a8) {
-        inst->op = OP_CLN;
-    }
-    else if (opcode[0] == 0x94c8) {
-        inst->op = OP_CLS;
-    }
-    else if (opcode[0] == 0x94e8) {
-        inst->op = OP_CLT;
-    }
-    else if (opcode[0] == 0x94b8) {
-        inst->op = OP_CLV;
-    }
-    else if (opcode[0] == 0x9498) {
-        inst->op = OP_CLZ;
-    }
-    else if (opcode[0] == 0x9408) {
-        inst->op = OP_SEC;
-    }
-    else if (opcode[0] == 0x9458) {
-        inst->op = OP_SEH;
-    }
-    else if (opcode[0] == 0x9478) {
-        inst->op = OP_SEI;
-    }
-    else if (opcode[0] == 0x9428) {
-        inst->op = OP_SEN;
-    }
-    else if (opcode[0] == 0x9448) {
-        inst->op = OP_SES;
-    }
-    else if (opcode[0] == 0x9468) {
-        inst->op = OP_SET;
-    }
-    else if (opcode[0] == 0x9438) {
-        inst->op = OP_SEV;
-    }
-    else if (opcode[0] == 0x9418) {
-        inst->op = OP_SEZ;
-    }
-    else if ((opcode[0] & 0xff8f) == 0x9488) {
+    if ((opcode[0] & 0xff8f) == 0x9488) {
         inst->op = OP_BCLR;
         inst->s = get_param_bclr_like(opcode);
     }

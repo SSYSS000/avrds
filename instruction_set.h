@@ -37,16 +37,6 @@ enum operation {
     OP_BST,
     OP_CALL,
     OP_CBI,
-    //OP_CBR, (OP_ANDI with K complemented)
-    OP_CLC,
-    OP_CLH,
-    OP_CLI,
-    OP_CLN,
-    //OP_CLR, (OP_EOR)
-    OP_CLS,
-    OP_CLT,
-    OP_CLV,
-    OP_CLZ,
     OP_COM,
     OP_CP,
     OP_CPC,
@@ -76,7 +66,6 @@ enum operation {
     OP_LDS,
     OP_LPM_R0,
     OP_LPM,
-    //OP_LSL, (OP_ADD)
     OP_LSR,
     OP_MOV,
     OP_MOVW,
@@ -94,7 +83,6 @@ enum operation {
     OP_RET,
     OP_RETI,
     OP_RJMP,
-    //OP_ROL, (OP_ADC)
     OP_ROR,
     OP_SBC,
     OP_SBCI,
@@ -105,15 +93,7 @@ enum operation {
     OP_SBR,
     OP_SBRC,
     OP_SBRS,
-    OP_SEC,
-    OP_SEH,
-    OP_SEI,
-    OP_SEN,
     OP_SER,
-    OP_SES,
-    OP_SET,
-    OP_SEV,
-    OP_SEZ,
     OP_SLEEP,
     OP_SPM,
     OP_STD,
@@ -122,7 +102,6 @@ enum operation {
     OP_SUB,
     OP_SUBI,
     OP_SWAP,
-    //OP_TST, (OP_AND)
     OP_WDR,
     OP_XCH,
 };
