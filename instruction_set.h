@@ -93,7 +93,6 @@ enum operation {
     OP_SBR,
     OP_SBRC,
     OP_SBRS,
-    OP_SER,
     OP_SLEEP,
     OP_SPM,
     OP_STD,

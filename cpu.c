@@ -456,6 +456,7 @@ case_OP_CP:
         break;
 
     case OP_LDI:
+        /* SER is handled here. */
         Rd = K;
         break;
 
@@ -517,9 +518,6 @@ case_OP_CP:
         SREG.S = SREG.N ^ SREG.V;
         SREG.Z = R == 0;
         Rd = R;
-        break;
-    case OP_SER:
-        Rd = 0xff;
         break;
     case OP_SWAP:
         Rd = (Rd << 4) | (Rd >> 4);

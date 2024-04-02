@@ -170,10 +170,6 @@ int decode_instruction(const uint16_t *opcode, struct instruction *inst)
         inst->op = OP_LDI;
         get_params_andi_like(opcode, &inst->Rd, &inst->K);
     }
-    else if ((opcode[0] & 0xff0f) == 0xef0f) {
-        inst->op = OP_SER;
-        inst->Rd = ((opcode[0] >> 4) & 0xf) + 16;
-    }
     else if ((opcode[0] & 0xf000) == 0x6000) {
         inst->op = OP_ORI;
         get_params_andi_like(opcode, &inst->Rd, &inst->K);
