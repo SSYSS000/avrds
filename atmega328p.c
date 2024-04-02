@@ -7,13 +7,13 @@ static int load_io(void *m, unsigned addr, uint8_t *byte)
     struct atmega328p *mcu = m;
 
     switch (addr) {
-    case 0x5d: /* SPL */
+    case 0x3d: /* SPL */
         *byte = mcu->cpu.sp;
         break;
-    case 0x5e: /* SPH */
+    case 0x3e: /* SPH */
         *byte = mcu->cpu.sp >> 8;
         break;
-    case 0x5f: /* SREG */
+    case 0x3f: /* SREG */
         memcpy(byte, &mcu->cpu.sreg, 1);
         break;
     default:
@@ -34,13 +34,13 @@ static int store_io(void *m, unsigned addr, uint8_t byte)
     struct atmega328p *mcu = m;
 
     switch (addr) {
-    case 0x5d: /* SPL */
+    case 0x3d: /* SPL */
         mcu->cpu.sp = mcu->cpu.sp & 0xff00 | byte;
         break;
-    case 0x5e: /* SPH */
+    case 0x3e: /* SPH */
         mcu->cpu.sp = byte << 8 | mcu->cpu.sp & 0xff;
         break;
-    case 0x5f: /* SREG */
+    case 0x3f: /* SREG */
         memcpy(&mcu->cpu.sreg, &byte, 1);
         break;
     default:
